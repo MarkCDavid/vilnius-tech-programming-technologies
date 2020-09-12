@@ -69,7 +69,7 @@ public class BSTNode<T extends Comparable<T>>  {
         else if(this.right != null && comparison > 0) {
             this.right.delete(value);
         }
-        else {
+        else if (comparison == 0) {
 
             if (this.right != null && this.left != null) {
                 boolean searchRight = this.right.getHeight() > this.left.getHeight();
