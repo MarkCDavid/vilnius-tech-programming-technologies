@@ -1,3 +1,5 @@
+package BST;
+
 /**
  * @author Aurimas Šakalys 20185388
  */
@@ -63,23 +65,21 @@ public class BSTNode<T extends Comparable<T>>  {
 
         if(this.left != null && comparison < 0) {
             this.left.delete(value);
-            return;
         }
-
-        if(this.right != null && comparison > 0) {
+        else if(this.right != null && comparison > 0) {
             this.right.delete(value);
-            return;
         }
+        else {
 
-        if(this.right != null && this.left != null) {
-            boolean searchRight = this.right.getHeight() > this.left.getHeight();
-            BSTNode<T> successor = searchRight ? this.right.find_min() : this.left.find_max();
-            this.value = successor.value;
-            successor.delete(successor.value);
+            if (this.right != null && this.left != null) {
+                boolean searchRight = this.right.getHeight() > this.left.getHeight();
+                BSTNode<T> successor = searchRight ? this.right.find_min() : this.left.find_max();
+                this.value = successor.value;
+                successor.delete(successor.value);
+            } else if (this.left != null) this.replaceInParent(this.left);
+            else if (this.right != null) this.replaceInParent(this.right);
+            else this.replaceInParent(null);
         }
-        else if(this.left != null) this.replaceInParent(this.left);
-        else if(this.right != null) this.replaceInParent(this.right);
-        else this.replaceInParent(null);
     }
 
     private void replaceInParent(BSTNode<T> value) {
@@ -113,7 +113,7 @@ public class BSTNode<T extends Comparable<T>>  {
 
     @Override
     public String toString() {
-        return "BSTNode{" +
+        return "BST.BSTNode{" +
                 "value=" + value +
                 ", left=" + (hasLeft() ? getLeft().value : 'X') +
                 ", right=" + (hasRight() ? getRight().value : 'X') +

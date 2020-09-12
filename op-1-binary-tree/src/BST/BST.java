@@ -1,3 +1,5 @@
+package BST;
+
 public class BST<T extends Comparable<T>> {
 
     BSTNode<T> root;
@@ -21,6 +23,10 @@ public class BST<T extends Comparable<T>> {
                 if (this.root.hasRight() && this.root.getRight().getParent() == null) this.root = this.root.getRight();
             }
         }
+    }
+
+    public int height() {
+        return this.root == null ? 0 : this.root.getHeight();
     }
 
     @Override
