@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        BST<Integer> binarySearchTree = new BST<>();
+        BST<Integer> binarySearchTree = new BST<Integer>();
 
         while (true) {
             System.out.println(binarySearchTree);

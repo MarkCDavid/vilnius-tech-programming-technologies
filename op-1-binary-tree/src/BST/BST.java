@@ -1,10 +1,12 @@
 package BST;
 
-import java.util.*;
-
-public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
+public class BST<T extends Comparable<T>> {
 
     private BSTNode<T> root;
+
+    public BSTNode<T> getRoot() {
+        return root;
+    }
 
     public void insert(T value) {
         if (this.root == null) this.root = new BSTNode<>(value);
@@ -36,36 +38,5 @@ public class BST<T extends Comparable<T>> implements Iterable<BSTNode<T>> {
     public String toString() {
         if (this.root == null) return "<EMPTY>";
         return BSTPainter.toString(this.root);
-    }
-
-    @Override
-    public Iterator<BSTNode<T>> iterator() {
-        return new BSTIterator(this.root);
-    }
-
-    public class BSTIterator implements Iterator<BSTNode<T>> {
-
-        private final Queue<BSTNode<T>> nodesToVisit = new LinkedList<>();
-
-        public BSTIterator(BSTNode<T> root) {
-            if(root != null)
-                nodesToVisit.add(root);
-        }
-
-        @Override
-        public boolean hasNext() {
-            return nodesToVisit.size() > 0;
-        }
-
-        @Override
-        public BSTNode<T> next() {
-            BSTNode<T> nextNode = nodesToVisit.poll();
-            if(nextNode == null) return null;
-
-            if(nextNode.hasLeft()) nodesToVisit.add(nextNode.getLeft());
-            if(nextNode.hasRight()) nodesToVisit.add(nextNode.getRight());
-
-            return nextNode;
-        }
     }
 }
