@@ -1,10 +1,10 @@
 package UI;
 
-import BST.*;
+import BST.BST;
+import BST.BSTNode;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 public class TreePainter extends JComponent {
@@ -22,7 +22,7 @@ public class TreePainter extends JComponent {
 
     BST<Integer> tree;
     BSTNode<Integer> found;
-    int radius = 50;
+    int radius = 30;
 
     public void paintComponent(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics.create();
@@ -74,9 +74,13 @@ public class TreePainter extends JComponent {
     }
 
     private void drawTreeNodeText(Graphics2D graphics, int x, int y, int radius, Integer value){
+        float fontSize = (float)(radius - 10) - 3 * value.toString().length();
+        graphics.setFont(graphics.getFont().deriveFont(fontSize).deriveFont(Font.BOLD));
+
         Rectangle2D bounds = graphics.getFontMetrics().getStringBounds(value.toString(), graphics);
         graphics.setColor(Color.BLACK);
         graphics.setStroke(new BasicStroke(1));
+
         graphics.drawString(value.toString(), x - (int)(bounds.getWidth())/2, y + (int)(bounds.getHeight())/2);
     }
 
